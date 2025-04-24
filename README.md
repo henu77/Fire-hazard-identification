@@ -30,3 +30,14 @@ dataset
 运行 `split_dataset.py` 脚本将数据集划分为训练集和验证集，划分比例为 9:1。划分后的数据集标注文件为 `train_split.txt` 和 `val_split.txt`
 
 # 训练
+使用 `train.py` 脚本进行训练，训练参数如下：
+
+```bash
+python train.py --config config.yaml
+```
+
+# 推理
+
+```bash
+python info.py --config path --img_list dataset/A.txt --img_dir dataset/A
+```
