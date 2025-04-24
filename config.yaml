@@ -1,0 +1,51 @@
+device: "cuda"  # 或 "cpu"
+
+transform:
+  train:
+    Resize: [224, 224]
+    RandomHorizontalFlip: 0.5  # 50%概率水平翻转
+    RandomRotation: 10  # 随机旋转±10度
+    ColorJitter:
+      brightness: 0.2
+      contrast: 0.2
+      saturation: 0.2
+      hue: 0.1
+    ToTensor: null
+    Normalize:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+      
+  val:
+    Resize: [224, 224]
+    ToTensor: null
+    Normalize:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+
+model:
+  name: "efficientnet_b0"
+  pretrained: true
+  num_classes: 5
+
+dataset:
+  data_root_path: "dataset/train"
+  train_txt: "dataset/train_split.txt"
+  val_txt: "dataset/val_split.txt"
+
+training:
+  batch_size: 128
+  epochs: 100
+  num_workers: 8
+
+optimizer:
+  type: "Adam"
+  params:
+    lr: 0.001
+
+scheduler:
+  type: "StepLR"
+  params:
+    step_size: 5
+    gamma: 0.1
+
+output_dir: "./outputs"
