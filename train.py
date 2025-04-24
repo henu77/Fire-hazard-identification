@@ -10,6 +10,7 @@ from torchvision import models, transforms
 from datetime import datetime
 from dataset import CustomDataset
 import logging
+import argparse
 
 
 def setup_logging(output_dir):
@@ -210,4 +211,8 @@ def main(config_path):
 
 
 if __name__ == "__main__":
-    main("config.yaml")
+    parser = argparse.ArgumentParser(description='模型训练脚本')
+    parser.add_argument('--config', type=str, default='config.yaml', 
+                        help='配置文件路径 (默认: config.yaml)')
+    args = parser.parse_args()
+    main(args.config)
